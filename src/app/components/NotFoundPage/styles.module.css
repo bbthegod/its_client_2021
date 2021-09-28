@@ -1,0 +1,40 @@
+.root {
+  font-family: Open Sans, sans-serif;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  line-height: 1.4;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.h1Class {
+  font-family: Open Sans, sans-serif;
+  font-size: 146px;
+  font-weight: 700;
+  margin: 0px;
+  color: #6863ce;
+}
+.spanClass {
+  font-family: Open Sans, sans-serif;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  background-image: url(../../../assets/images/emoji.png);
+  background-size: cover;
+  z-index: -1;
+}
+.h2Class {
+  font-family: Open Sans, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  color: #6863ce;
+}
+.pClass {
+  font-family: Open Sans, sans-serif;
+  color: #6863ce;
+  font-weight: 300;
+}

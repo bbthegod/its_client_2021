@@ -1,0 +1,19 @@
+.root {
+  padding: 10px;
+  position: relative;
+  height: 40px;
+}
+.next {
+  width: 100px;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  color: #ffffff !important;
+}
+.prev {
+  width: 100px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  color: #ffffff !important;
+}

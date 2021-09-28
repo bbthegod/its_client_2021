@@ -1,0 +1,20 @@
+.root {
+  width: 100%;
+}
+
+.header {
+  background-color: #1f1f1f !important;
+  box-shadow: none !important;
+}
+
+.iconBox {
+  margin-right: 16px;
+  position: absolute;
+}
+.icon {
+  color: #6863CE;
+}
+.logo {
+  height: 30px;
+  margin: auto;
+}

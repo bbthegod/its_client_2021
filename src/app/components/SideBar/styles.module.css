@@ -1,0 +1,25 @@
+.root {
+  width: 80%;
+  color: #FFFFFF;
+}
+.header {
+  position: relative !important;
+  background-color: #1f1f1f !important;
+  box-shadow: none !important;
+}
+.headericon {
+  color: #FFFFFF;
+}
+.list {
+  background-color: #1f1f1f;
+  height: 100vh;
+}
+.icon {
+  color: #FFFFFF;
+}
+.text {
+  color: #FFFFFF;
+}
+.iconbox {
+  max-width: 40px;
+}

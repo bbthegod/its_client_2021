@@ -1,0 +1,11 @@
+.root {
+  padding: 24px;
+}
+.paper {
+  padding: 24px;
+}
+.text {
+  text-align: center;
+  color: #ffa726;
+  font-size: 20px;
+}
