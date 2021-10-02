@@ -5,7 +5,7 @@
  */
 import { useEffect, useState, useContext, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Paper, LinearProgress } from '@mui/material';
+import { Paper } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import io from 'socket.io-client';
 
@@ -13,6 +13,7 @@ import AuthStorageContext from 'context/AuthStorageContext';
 import QuestionContent from './components/QuestionContent';
 import ControlButtons from './components/ControlButtons';
 import QuestionList from './components/QuestionList';
+import Loading from 'app/components/Loading';
 import SnackbarContext from 'context/SnackbarContext';
 import { selectHomePage } from './slice/selectors';
 import { SOCKET_URL } from 'constants/url';
@@ -28,7 +29,7 @@ export default function HomePage(props: Props) {
   const [question, setQuestion] = useState<Question>();
   const [index, setIndex] = useState(0);
   //====================================== Hooks ======================================
-  const { playData } = useSelector(selectHomePage);
+  const { playData, loading } = useSelector(selectHomePage);
   const AuthStorage = useContext(AuthStorageContext);
   const Snackbar = useContext(SnackbarContext);
   const dispatch = useDispatch();
@@ -91,21 +92,17 @@ export default function HomePage(props: Props) {
   socket.on('error', () => Snackbar.open('Có lỗi khi gửi câu trả lời', 'error'));
 
   //====================================== Render ======================================
-  return (
+  return !loading && playData && question ? (
     <div className={classes.root}>
-      {playData && question ? (
-        <div>
-          <Paper className={classes.content}>
-            <QuestionContent question={question} playData={playData} index={index} answerQuestion={answerQuestion} />
-            <ControlButtons next={next} previous={previous} disabledPrev={index === 0} disabledNext={index === playData?.questions?.length - 1} />
-          </Paper>
-          <Paper className={classes.list}>
-            <QuestionList playData={playData} selectQuestion={selectQuestion} />
-          </Paper>
-        </div>
-      ) : (
-        <LinearProgress />
-      )}
+      <Paper className={classes.content}>
+        <QuestionContent question={question} playData={playData} index={index} answerQuestion={answerQuestion} />
+        <ControlButtons next={next} previous={previous} disabledPrev={index === 0} disabledNext={index === playData?.questions?.length - 1} />
+      </Paper>
+      <Paper className={classes.list}>
+        <QuestionList playData={playData} selectQuestion={selectQuestion} />
+      </Paper>
     </div>
+  ) : (
+    <Loading />
   );
 }

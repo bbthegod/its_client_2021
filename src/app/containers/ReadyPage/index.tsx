@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 
 import { Paper, Typography, Button } from '@mui/material';
 import { selectReadyPage } from './slice/selectors';
+import Loading from 'app/components/Loading';
 import classes from './styles.module.css';
 import { actions } from './slice';
 
@@ -16,10 +17,13 @@ interface Props {}
 
 export default function ReadyPage(props: Props) {
   //====================================== Hooks ======================================
-  const { playData } = useSelector(selectReadyPage);
+  const { playData, loading } = useSelector(selectReadyPage);
   const dispatch = useDispatch();
   const history = useHistory();
   //====================================== Effect ======================================
+  useEffect(() => {
+    dispatch(actions.get());
+  }, [dispatch]);
   useEffect(() => {
     if (playData && playData.timeOut) {
       if (new Date(playData.timeOut).getTime() - new Date(Date.now()).getTime() <= 0) {
@@ -38,7 +42,7 @@ export default function ReadyPage(props: Props) {
     }
   };
   //====================================== Render ======================================
-  return (
+  return !loading ? (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Typography variant="h5" component="h5" className={classes.text}>
@@ -69,5 +73,7 @@ export default function ReadyPage(props: Props) {
         </div>
       </Paper>
     </div>
+  ) : (
+    <Loading />
   );
 }
