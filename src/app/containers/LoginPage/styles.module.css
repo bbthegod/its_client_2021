@@ -4,9 +4,11 @@
 .paper {
   padding: 16px 20px;
 }
+.inputWrapper {
+  margin-bottom: 20px;
+}
 .input {
   width: 100%;
-  margin: 10px 0px;
 }
 .input fieldset {
   border-color: #6863ce;
@@ -16,6 +18,7 @@
   color: #ffffff;
   font-size: 20px !important;
   margin: 10px !important;
+  margin-bottom: 20px !important;
 }
 .hideIcon {
   color: #6863ce !important;

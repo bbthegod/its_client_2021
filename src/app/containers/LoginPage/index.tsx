@@ -74,36 +74,40 @@ export default function LoginPage(props: Props) {
               <Typography variant="h5" component="h5" className={classes.text}>
                 ĐĂNG NHẬP
               </Typography>
-              <Field
-                as={TextField}
-                error={!!errors.studentCode && !!touched.studentCode}
-                name="studentCode"
-                className={classes.input}
-                variant="outlined"
-                label="Mã Sinh Viên"
-                onFocus={() => setFieldTouched('studentCode', true)}
-                helperText={errors.studentCode}
-              />
-              <Field
-                as={TextField}
-                error={!!errors.password && !!touched.password}
-                name="password"
-                className={classes.input}
-                variant="outlined"
-                type={showPassword ? 'text' : 'password'}
-                label="Mật Khẩu"
-                helperText={errors.password}
-                onFocus={() => setFieldTouched('password', true)}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton aria-label="toggle password visibility" className={classes.hideIcon} onClick={onShowPassword}>
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+              <div className={classes.inputWrapper}>
+                <Field
+                  as={TextField}
+                  error={!!errors.studentCode && !!touched.studentCode}
+                  name="studentCode"
+                  variant="outlined"
+                  label="Mã Sinh Viên"
+                  onFocus={() => setFieldTouched('studentCode', true)}
+                  helperText={errors.studentCode}
+                  className={classes.input}
+                />
+              </div>
+              <div className={classes.inputWrapper}>
+                <Field
+                  as={TextField}
+                  error={!!errors.password && !!touched.password}
+                  name="password"
+                  variant="outlined"
+                  type={showPassword ? 'text' : 'password'}
+                  label="Mật Khẩu"
+                  helperText={errors.password}
+                  onFocus={() => setFieldTouched('password', true)}
+                  className={classes.input}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton aria-label="toggle password visibility" className={classes.hideIcon} onClick={onShowPassword}>
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
               <div className={classes.buttonBox}>
                 <Button
                   variant="contained"

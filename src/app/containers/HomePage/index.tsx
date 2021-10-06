@@ -16,7 +16,7 @@ import QuestionList from './components/QuestionList';
 import Loading from 'app/components/Loading';
 import SnackbarContext from 'context/SnackbarContext';
 import { selectHomePage } from './slice/selectors';
-import { SOCKET_URL } from 'constants/url';
+import { SOCKET_URL } from 'constants/config';
 import classes from './styles.module.css';
 import { actions } from './slice';
 
