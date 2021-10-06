@@ -23,6 +23,23 @@ export function* get() {
   }
 }
 
+export function* end() {
+  try {
+    const { response } = yield call(request, {
+      url: '/play/end',
+      method: 'GET',
+    });
+    if (response) {
+      yield put(actions.endSucceed(response));
+    } else {
+      yield put(actions.endFailed());
+    }
+  } catch (err) {
+    yield put(actions.endFailed());
+  }
+}
+
 export function* homePageSaga() {
   yield takeLatest(actions.get.type, get);
+  yield takeLatest(actions.end.type, end);
 }

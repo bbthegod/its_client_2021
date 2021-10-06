@@ -1,19 +1,16 @@
 .root {
   padding: 10px;
-  position: relative;
   height: 40px;
+  display: flex;
+  justify-content: space-between;
 }
-.next {
+.sideButton {
   width: 100px;
   height: 40px;
-  position: absolute;
-  left: 0;
   color: #ffffff !important;
 }
-.prev {
-  width: 100px;
+.centerButton {
+  width: 110px;
   height: 40px;
-  position: absolute;
-  right: 0;
   color: #ffffff !important;
 }

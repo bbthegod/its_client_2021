@@ -37,6 +37,12 @@ export default function LoginPage(props: Props) {
   const history = useHistory();
   //====================================== Effect ======================================
 
+  useEffect(() => {
+    if (AuthStorage.get()) {
+      history.push('/play');
+    }
+  }, [AuthStorage, history]);
+
   //Open snackbar when login failed
   useEffect(() => {
     if (snackbar) {

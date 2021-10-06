@@ -73,6 +73,11 @@ export default function HomePage(props: Props) {
     if (playData && index < playData.questions.length - 1) setIndex(index + 1);
   };
 
+  //End play
+  const end = () => {
+    dispatch(actions.end());
+  };
+
   //Select question
   const selectQuestion = idx => setIndex(idx);
 
@@ -98,7 +103,13 @@ export default function HomePage(props: Props) {
     <div className={classes.root}>
       <Paper className={classes.content}>
         <QuestionContent question={question} playData={playData} index={index} answerQuestion={answerQuestion} />
-        <ControlButtons next={next} previous={previous} disabledPrev={index === 0} disabledNext={index === playData?.questions?.length - 1} />
+        <ControlButtons
+          end={end}
+          next={next}
+          previous={previous}
+          disabledPrev={index === 0}
+          disabledNext={index === playData?.questions?.length - 1}
+        />
       </Paper>
       <Paper className={classes.list}>
         <QuestionList playData={playData} selectQuestion={selectQuestion} />

@@ -34,6 +34,22 @@ const slice = createSlice({
       state.success = false;
       state.failures = true;
     },
+    end(state) {
+      state.loading = true;
+      state.success = false;
+      state.failures = false;
+    },
+    endSucceed(state, actions) {
+      state.playData = actions.payload;
+      state.loading = false;
+      state.success = true;
+      state.failures = false;
+    },
+    endFailed(state) {
+      state.loading = false;
+      state.success = false;
+      state.failures = true;
+    },
     answer(state, actions) {
       let oldState = JSON.parse(JSON.stringify(state.playData));
       if (oldState) {
