@@ -9,7 +9,7 @@ import { actions } from '.';
 
 export function* login(payload) {
   try {
-    const respone = yield call(request, {
+    const { response, error } = yield call(request, {
       url: '/auth/login',
       method: 'POST',
       data: {
@@ -17,8 +17,19 @@ export function* login(payload) {
         password: payload.payload.password,
       },
     });
-    if (respone) {
-      yield put(actions.loginSucceed(respone));
+    if (response) {
+      yield put(actions.loginSucceed(response));
+    } else if (error) {
+      if (error.response.status === 401) {
+        yield put(actions.loginFailed());
+        yield put(
+          actions.openSnackbar({
+            status: true,
+            message: 'Tài khoản hoặc mật khẩu không chính xác',
+            variant: 'error',
+          }),
+        );
+      }
     } else {
       yield put(actions.loginFailed());
       yield put(
@@ -30,6 +41,7 @@ export function* login(payload) {
       );
     }
   } catch (err) {
+    console.log(err, 'asdsadasd asd as das');
     yield put(actions.loginFailed());
     yield put(
       actions.openSnackbar({

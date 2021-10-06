@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import '../assets/styles/style.css';
+import '../assets/styles/style.scss';
 
 import NotFoundPage from 'app/components/NotFoundPage/loadable';
 import PrivateRoute from 'app/components/PrivateRoute/loadable';

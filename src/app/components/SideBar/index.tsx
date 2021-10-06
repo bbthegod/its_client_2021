@@ -79,12 +79,14 @@ export default function SideBar({ isOpen, toggleSidbar }: Props) {
           <ListItemText primary="ĐĂNG NHẬP" className={classes.text} />
         </ListItemButton>
 
-        <ListItemButton onClick={logout}>
-          <ListItemIcon className={classes.iconBox}>
-            <ExitToAppIcon className={classes.icon} />
-          </ListItemIcon>
-          <ListItemText primary="ĐĂNG XUẤT" className={classes.text} />
-        </ListItemButton>
+        {auth && (
+          <ListItemButton onClick={logout}>
+            <ListItemIcon className={classes.iconBox}>
+              <ExitToAppIcon className={classes.icon} />
+            </ListItemIcon>
+            <ListItemText primary="ĐĂNG XUẤT" className={classes.text} />
+          </ListItemButton>
+        )}
       </List>
     </Dialog>
   );

@@ -42,8 +42,8 @@ export async function request(payload) {
       error => Promise.reject(error),
     );
     const fetchResponse = await instance(payload);
-    return parseJSON(fetchResponse);
+    return { response: parseJSON(fetchResponse), error: undefined };
   } catch (error) {
-    console.log(error);
+    return { response: undefined, error };
   }
 }

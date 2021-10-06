@@ -1,5 +1,6 @@
 .root {
   width: 100%;
+  position: relative;
 }
 
 .header {
@@ -12,9 +13,12 @@
   position: absolute;
 }
 .icon {
-  color: #6863CE;
+  color: #6863ce;
 }
 .logo {
   height: 30px;
   margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
 }

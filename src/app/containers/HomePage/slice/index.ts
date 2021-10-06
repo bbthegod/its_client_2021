@@ -34,6 +34,14 @@ const slice = createSlice({
       state.success = false;
       state.failures = true;
     },
+    answer(state, actions) {
+      let oldState = JSON.parse(JSON.stringify(state.playData));
+      if (oldState) {
+        oldState.questions[actions.payload.index].answer = actions.payload.numbering;
+        oldState.questions[actions.payload.index].answered = true;
+        state.playData = oldState;
+      }
+    },
   },
 });
 

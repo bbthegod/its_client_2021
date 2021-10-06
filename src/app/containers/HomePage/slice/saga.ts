@@ -9,12 +9,12 @@ import { actions } from '.';
 
 export function* get() {
   try {
-    const respone = yield call(request, {
+    const { response } = yield call(request, {
       url: '/play/continue',
       method: 'GET',
     });
-    if (respone) {
-      yield put(actions.getSucceed(respone.data));
+    if (response) {
+      yield put(actions.getSucceed(response));
     } else {
       yield put(actions.getFailed());
     }

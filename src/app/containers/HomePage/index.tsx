@@ -22,18 +22,20 @@ import { actions } from './slice';
 
 interface Props {}
 
-const socket = io(SOCKET_URL);
+const socket = io(SOCKET_URL, {
+  withCredentials: true,
+});
 
 export default function HomePage(props: Props) {
-  //====================================== State ======================================
-  const [question, setQuestion] = useState<Question>();
-  const [index, setIndex] = useState(0);
   //====================================== Hooks ======================================
-  const { playData, loading } = useSelector(selectHomePage);
+  const { playData } = useSelector(selectHomePage);
   const AuthStorage = useContext(AuthStorageContext);
   const Snackbar = useContext(SnackbarContext);
   const dispatch = useDispatch();
   const history = useHistory();
+  //====================================== State ======================================
+  const [question, setQuestion] = useState<Question>();
+  const [index, setIndex] = useState(0);
   //====================================== Const ======================================
   const auth = AuthStorage.get();
   const token = useMemo(() => auth?.token, [auth]);
@@ -82,7 +84,7 @@ export default function HomePage(props: Props) {
         token,
         data: { index, answer: numbering },
       });
-      dispatch(actions.get());
+      dispatch(actions.answer({ index, numbering }));
     }
   };
 
@@ -92,7 +94,7 @@ export default function HomePage(props: Props) {
   socket.on('error', () => Snackbar.open('Có lỗi khi gửi câu trả lời', 'error'));
 
   //====================================== Render ======================================
-  return !loading && playData && question ? (
+  return playData && question ? (
     <div className={classes.root}>
       <Paper className={classes.content}>
         <QuestionContent question={question} playData={playData} index={index} answerQuestion={answerQuestion} />

@@ -3,7 +3,7 @@
  * LoginPage
  *
  */
-import { Paper, Button, Typography, InputAdornment, TextField, IconButton } from '@mui/material';
+import { Paper, Button, Typography, InputAdornment, TextField, IconButton, CircularProgress } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,9 +21,9 @@ interface Props {}
 
 const validationSchema = Yup.object().shape({
   studentCode: Yup.string()
-    .required('Trường này không được để trống !')
+    .required('Mã sinh viên không được để trống !')
     .matches(/^[0-9]{10}$/, 'Mã sinh viên không hợp lệ, ví dụ: 2017604482'),
-  password: Yup.string().required('Trường này không được để trống !'),
+  password: Yup.string().required('Mật khẩu không được để trống !'),
 });
 
 export default function LoginPage(props: Props) {
@@ -41,19 +41,13 @@ export default function LoginPage(props: Props) {
   useEffect(() => {
     if (snackbar) {
       Snackbar.open(message, variant);
-      setTimeout(() => {
-        dispatch(actions.closeSnackbar());
-      }, 2000);
+      setTimeout(() => dispatch(actions.closeSnackbar()), 3000);
     }
   }, [Snackbar, dispatch, message, variant, snackbar]);
 
   //Redirect to play when success
   useEffect(() => {
-    if (data) {
-      AuthStorage.set(data, () => {
-        history.push('/play');
-      });
-    }
+    if (data) AuthStorage.set(data, () => history.push('/play'));
     return () => {
       dispatch(actions.reset());
     };
@@ -61,22 +55,16 @@ export default function LoginPage(props: Props) {
 
   //====================================== Callback ======================================
   const onShowPassword = () => setShowPassword(!showPassword);
+  const onSubmit = values => {
+    dispatch(actions.login(values));
+  };
   //====================================== Render ======================================
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Formik
-          initialValues={{
-            studentCode: '',
-            password: '',
-          }}
-          validationSchema={validationSchema}
-          onSubmit={values => {
-            dispatch(actions.login(values));
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form>
+        <Formik initialValues={{ studentCode: '2017604482', password: '123123' }} validationSchema={validationSchema} onSubmit={onSubmit}>
+          {({ errors, touched, setFieldTouched }) => (
+            <Form autoComplete="off">
               <Typography variant="h5" component="h5" className={classes.text}>
                 ĐĂNG NHẬP
               </Typography>
@@ -87,6 +75,7 @@ export default function LoginPage(props: Props) {
                 className={classes.input}
                 variant="outlined"
                 label="Mã Sinh Viên"
+                onFocus={() => setFieldTouched('studentCode', true)}
                 helperText={errors.studentCode}
               />
               <Field
@@ -98,6 +87,7 @@ export default function LoginPage(props: Props) {
                 type={showPassword ? 'text' : 'password'}
                 label="Mật Khẩu"
                 helperText={errors.password}
+                onFocus={() => setFieldTouched('password', true)}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -114,9 +104,9 @@ export default function LoginPage(props: Props) {
                   color="primary"
                   className={classes.button}
                   type="submit"
-                  disabled={loading || (!errors.studentCode && !touched.studentCode && !errors.password && !touched.password)}
+                  disabled={loading || !!errors.password || !!errors.studentCode || !!!touched.password || !!!touched.studentCode}
                 >
-                  ĐĂNG NHẬP
+                  {!loading ? 'ĐĂNG NHẬP' : <CircularProgress size={15} />}
                 </Button>
               </div>
             </Form>

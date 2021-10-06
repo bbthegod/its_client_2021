@@ -2,11 +2,14 @@
   padding: 24px;
 }
 .paper {
-  padding: 16px 40px;
+  padding: 16px 20px;
 }
 .input {
   width: 100%;
   margin: 10px 0px;
+}
+.input fieldset {
+  border-color: #6863ce;
 }
 .text {
   text-align: center;
@@ -26,4 +29,8 @@
   width: 100%;
   height: 50px;
   color: #ffffff !important;
+}
+.progress {
+  height: 30px;
+  width: 30px;
 }

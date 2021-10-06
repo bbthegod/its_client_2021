@@ -22,7 +22,7 @@ export default function Snackbar(props: Props) {
   //====================================== Render ======================================
   return (
     <SnackbarContext.Provider value={{ open }}>
-      <SnackbarProvider maxSnack={3} autoHideDuration={2000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} ref={providerRef}>
+      <SnackbarProvider maxSnack={3} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} ref={providerRef}>
         {props.children}
       </SnackbarProvider>
     </SnackbarContext.Provider>

@@ -9,12 +9,12 @@ import { actions } from '.';
 
 export function* get() {
   try {
-    const data = yield call(request, {
+    const { response } = yield call(request, {
       url: `/play/get`,
       method: 'GET',
     });
-    if (data) {
-      yield put(actions.getSucceed(data.data));
+    if (response) {
+      yield put(actions.getSucceed(response));
     } else {
       yield put(actions.getFailed());
     }
@@ -25,12 +25,12 @@ export function* get() {
 
 export function* start() {
   try {
-    const data = yield call(request, {
+    const { response } = yield call(request, {
       url: `/play/start`,
       method: 'GET',
     });
-    if (data) {
-      yield put(actions.startSucceed(data.data));
+    if (response) {
+      yield put(actions.startSucceed(response));
     } else {
       yield put(actions.startFailed());
     }
