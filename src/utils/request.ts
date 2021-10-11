@@ -27,7 +27,6 @@ function parseJSON(response: AxiosResponse) {
 
 export async function request(payload) {
   try {
-    console.log(API_URL);
     const auth = localStorage.getItem('auth') ? jwt.verify(localStorage.getItem('auth'), 'shhhhh') : null;
     let instance = axios.create({ baseURL: API_URL });
     instance.interceptors.request.use(

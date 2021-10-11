@@ -68,7 +68,7 @@ export default function LoginPage(props: Props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Formik initialValues={{ studentCode: '2017604482', password: '123123' }} validationSchema={validationSchema} onSubmit={onSubmit}>
+        <Formik initialValues={{ studentCode: '', password: '' }} validationSchema={validationSchema} onSubmit={onSubmit}>
           {({ errors, touched, setFieldTouched }) => (
             <Form autoComplete="off">
               <Typography variant="h5" component="h5" className={classes.text}>
